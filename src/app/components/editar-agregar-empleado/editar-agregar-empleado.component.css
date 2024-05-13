@@ -1,0 +1,27 @@
+.content{
+    padding-top: 10px;
+  }
+  
+  .row{
+    display: flex;
+    gap: 10px;
+  }
+  
+  mat-form-field{
+    width: 100%;
+  
+  }
+  
+  .action{
+    padding: 0px 25px 20px;
+  }
+  
+  button{
+    flex: 1;
+  }
+  
+  .mat-mdc-raised-button.mat-primary {
+    --mdc-protected-button-container-color: #673ab7;
+    --mdc-protected-button-label-text-color: #fff;
+  }
+  
