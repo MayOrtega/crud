@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap');
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.table-container {
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-width:1000px;
+    overflow-x: auto; 
+    width: 100%;
+    -webkit-overflow-scrolling: touch; 
+  }
+
+  .mat-table {
+    min-width: 100%;
+  }
+
+  .filter-container {
+    width: 100%; 
+  }
+  
+    
+  @media screen and (max-width: 600px) {
+    .table-container {
+      max-width: 100%; 
+    }
+    .mat-column-id, .mat-column-action {
+        display: none;
+      }
+  }
+
+.main-body{
+  padding-top: 20px;
+  margin: 0 auto;
+  max-width: 1248px;
+
+}
+
+mat-form-field {
+  width: 40%;
+  height:70px;
+
+}
+
+
+.mat-column-email{
+  /* flex-wrap: nowrap; */
+  white-space: unset !important;
+  flex: 0 0 15% !important;
+}
+
+mat-header-cell, mat-cell {
+  justify-content: justify;
+}
+
+.mat-toolbar-single-row{
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.5vw;
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+mat-table{
+  background-color: #fcfcfc;
+  padding-top: 20px;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+mat-paginator{
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 2px 2px;
+}
+
+
+.mat-mdc-icon-button.mat-warn {
+  --mdc-icon-button-icon-color: #f62b10;
+}
+
+.mat-mdc-paginator {
+  background:#f8c2a6;
+  font-weight: 500;
+}
+
+.mat-mdc-raised-button.mat-unthemed {
+  --mdc-protected-button-container-color: #fff;
+  --mdc-protected-button-label-text-color: #4e4d4d;
+  border:  #f62b10 solid 1px;
+}
+
+.mdc-data-table__header-cell {
+  color: #0040c0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.mdc-data-table__pagination-total, .mdc-data-table__pagination-rows-per-page-label, .mdc-data-table__cell {
+  color: rgb(93, 92, 92);
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 540;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: rgb(220, 175, 175);
+}
