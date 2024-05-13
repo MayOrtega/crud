@@ -78,7 +78,7 @@ export class PrincipalComponent implements OnInit {
           this.notificacionService.openSnackBar('Employee added!', 'Done');
           this.dataSource.data = [...this.dataSource.data, newEmployee];
           this.cdr.detectChanges();
-          this.notificacionService.openSnackBar('Empleado agregado!', 'Listo');
+          this.notificacionService.openSnackBar('Employee added!', 'Listo');
         },
         error: (err) => {
           console.error("Error al agregar empleado:", err);
@@ -135,6 +135,7 @@ export class PrincipalComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe({
       next: (val) => {
+        this.notificacionService.openSnackBar('Employee updated!', 'Done');
         console.log('Diálogo de edición cerrado, datos actualizados:', val);
         if (val) {
           console.log('Datos actuales en la lista de empleados:', this.dataSource.data);
@@ -149,6 +150,8 @@ export class PrincipalComponent implements OnInit {
             this.dataSource._updateChangeSubscription();
             this.dataSource.sort = this.sort; 
             this.dataSource.paginator = this.paginator; 
+
+            
           }
         }
       }
