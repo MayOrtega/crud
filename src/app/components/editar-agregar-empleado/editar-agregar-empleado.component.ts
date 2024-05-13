@@ -38,10 +38,8 @@ export class EditarAgregarEmpleadoComponent {
     if (data && data.id) {
       this.isNewEmployee = false;
       this.employeeId = data.id;
-      console.log('Existing employee. ID:', this.employeeId);
     } else {
       this.isNewEmployee = true;
-      console.log('New employee.');
     }
   }
   
@@ -54,9 +52,7 @@ export class EditarAgregarEmpleadoComponent {
   }
 
   onFormSubmit(): void {
-    console.log('Form submitted');
-    if (this.empForm.valid) {
-      console.log('Form is valid');
+      if (this.empForm.valid) {
       const employeeData = {
         name: this.empForm.value.name,
         username: this.empForm.value.username,
@@ -65,33 +61,26 @@ export class EditarAgregarEmpleadoComponent {
       };
   
       if (this.isNewEmployee) {
-        console.log('Creating new employee');
         this.empleadosService.addEmployee(employeeData).subscribe(
           (newEmployee) => {
-            console.log('New employee created:', newEmployee);
             this.dialogRef.close(newEmployee);
           },
           (error) => {
-            console.error('Error creating employee:', error);
-          }
+            throw new Error('Error creating employee: ' + error);
+        }
         );
       } else if (this.employeeId) {
-        console.log('Updating employee:', this.employeeId);
         this.empleadosService.updateEmployee(this.employeeId, employeeData).subscribe(
           () => {
-            console.log('Employee updated:', employeeData);
-
             const employeeUpdatedData = { ...employeeData, id: this.employeeId };
             this.empleadosService.sendData(employeeUpdatedData);
             this.dialogRef.close(employeeData);
           },
           (error) => {
-            console.error('Error updating employee:', error);
-          }
+            throw new Error('Error updating employee: ' + error);
+        }
         );
       }
-    } else {
-      console.log('Form is invalid');
-    }
+   }
   }
 }

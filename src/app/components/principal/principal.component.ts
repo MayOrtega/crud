@@ -71,17 +71,15 @@ export class PrincipalComponent implements OnInit {
 
   addEmployee(data: any): void { 
     if (data) { 
-      console.log("Datos del empleado a agregar:", data);
-      this.empleadosService.addEmployee(data).subscribe({
+        this.empleadosService.addEmployee(data).subscribe({
         next: (newEmployee) => {
-          console.log("Respuesta del servidor:", newEmployee);
           this.notificacionService.openSnackBar('Employee added!', 'Done');
           this.dataSource.data = [...this.dataSource.data, newEmployee];
           this.cdr.detectChanges();
           this.notificacionService.openSnackBar('Employee added!', 'Listo');
         },
         error: (err) => {
-          console.error("Error al agregar empleado:", err);
+          throw new Error('Error adding employee: ' + err);
         }
       });
     }
@@ -117,8 +115,7 @@ export class PrincipalComponent implements OnInit {
   }
 
   deleteEmployee(id: number) {
-    console.log('ID del empleado a eliminar:', id);
-    this.empleadosService.deleteEmployee(id).subscribe({
+      this.empleadosService.deleteEmployee(id).subscribe({
       next: (res) => {
         this.notificacionService.openSnackBar('Employee deleted!', 'Done');
         const updatedData = this.dataSource.data.filter(emp => emp.id !== id);
@@ -129,30 +126,23 @@ export class PrincipalComponent implements OnInit {
   }
 
   openEditForm(data: any) {
-    console.log('Abriendo diálogo de edición con datos:', data);
-    const dialogRef = this.dialog.open(EditarAgregarEmpleadoComponent, {
+     const dialogRef = this.dialog.open(EditarAgregarEmpleadoComponent, {
       data,
     });
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         this.notificacionService.openSnackBar('Employee updated!', 'Done');
-        console.log('Diálogo de edición cerrado, datos actualizados:', val);
-        if (val) {
-          console.log('Datos actuales en la lista de empleados:', this.dataSource.data);
-                
+                        
           const index = this.dataSource.data.findIndex(emp => emp.id === val.id);
           if (index !== -1) {
             this.dataSource.data[index] = val;
             this.dataSource.data = [...this.dataSource.data]; 
-            console.log('Datos actualizados en la lista de empleados:', this.dataSource.data);
             this.dataSource.data[0].phone = 343434434;
             
             this.dataSource._updateChangeSubscription();
             this.dataSource.sort = this.sort; 
             this.dataSource.paginator = this.paginator; 
-
-            
-          }
+ 
         }
       }
     });

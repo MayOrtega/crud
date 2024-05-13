@@ -18,21 +18,17 @@ export class EmpleadosService {
   }
 
   getEmployeeList(): Observable<any[]> {
-    return this.http.get(this.empleadosUrl)
-      .pipe(
-        tap(data => console.log('Fetched employees:', data)), 
-        catchError((error: HttpErrorResponse) => {
-          console.error('Error fetching employees:', error);
-          return of([]);
-        }),
-        map(data => data as any[]) 
-      );
+    return this.http.get(this.empleadosUrl).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error fetching employees:', error);
+        return of([]);
+      }),
+      map(data => data as any[]) 
+    );
   }
 
   addEmployee(data: any): Observable<any> {
-    console.log("Datos del empleado a agregar:", data);
     return this.http.post<any>(this.empleadosUrl, data).pipe(
-      tap((response: any) => console.log("Respuesta del servidor:", response)),
       catchError(this.handleError<any>('addEmployee'))
     );
   }
@@ -40,16 +36,13 @@ export class EmpleadosService {
   updateEmployee(id: number, data: any): Observable<any> {
     const url = `${this.empleadosUrl}/${id}`;
     return this.http.put<any>(url, data).pipe(
-      tap(_ => console.log(`Updated employee with id=${id}`)),
       catchError(this.handleError<any>('updateEmployee'))
     );
   }
 
-
   deleteEmployee(id: number): Observable<any> {
     const url = `${this.empleadosUrl}/${id}`;
     return this.http.delete<any>(url).pipe(
-      tap(_ => console.log(`Deleted employee with id=${id}`)),
       catchError((error) => {
         console.error('Error deleting employee:', error);
         return throwError('Unable to delete employee. Please try again later.');
